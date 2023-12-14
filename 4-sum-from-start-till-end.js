@@ -12,15 +12,18 @@ function handleGetRequest (request, response)
     const start = parseInt (request.query.start, 10);
     const end = parseInt (request.query.end, 10);
 
-    const calculatedSum = findSum (start, end)
+    const totalSum = findSum (end);
+    const redundantPart = findSum (start - 1);
 
-    response.send ('findSum (' + start + ', ' + end +') = ' + calculatedSum)
+    const resultSum = totalSum - redundantPart;
+
+    response.send ('findSum (' + start + ', ' + end +') = ' + resultSum);
   }
   else
   {
     const n = 100;
 
-    const calculatedSum = findSum (n)
+    const calculatedSum = findSum (n);
 
     response.send ('findSum (' + n + ') = ' + calculatedSum)
   }
@@ -33,18 +36,8 @@ function startListening ()
 
 function findSum (n)
 {
-  let sum = 0
-  for (let i = 1; i <= n; ++i)
-  {
-    sum += i;
-  }
-  return sum;
-}
-
-function findSum (start, end)
-{
     let sum = 0;
-    for (let i = start; i <= end; ++i)
+    for (let i = 1; i <= n; ++i)
     {
         sum += i;
     }

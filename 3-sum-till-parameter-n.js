@@ -42,11 +42,6 @@ function findSum (n)
   return sum;
 }
 
-function handleByeRouteGetRequest (request, response)
-{
-  response.send ('Bye!')
-}
-
 /*
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
