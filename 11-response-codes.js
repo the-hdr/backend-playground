@@ -12,10 +12,14 @@ app.listen (port, startListening);
 function handlePostRequest (request, response)
 {
     let termNumber = request.body.termNumber;
+
+    if (termNumber > 60)
+    {
+        response.status(411).send ('ERROR: <termNumber> is huge!');
+    }
+    
     let calculatedTerm = fibonacci (termNumber);
 
-    console.log (request.body);
-    
     const answerObject = {
         calculatedTerm: calculatedTerm
     }

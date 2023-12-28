@@ -5,21 +5,41 @@ const port = 3000
 
 app.use (bodyParser.json());
 
-app.post('/', handlePostRequest);
+app.get ('/', handleGetRequest1);
+app.get ('/g', handleGetRequest2);
 
 app.listen (port, startListening);
 
-function handlePostRequest (request, response)
+function handleGetRequest1 (request, response)
 {
-    let termNumber = request.body.termNumber;
+    let termNumber = parseInt (request.query.termNumber);
     let calculatedTerm = fibonacci (termNumber);
-
-    console.log (request.body);
     
     const answerObject = {
-        calculatedTerm: calculatedTerm
+        "calculated-term": calculatedTerm
     }
+
+    console.log (answerObject);
+    
     response.status(200).send (answerObject);
+}
+
+function handleGetRequest2 (request, response)
+{
+    response.send (`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Hello From Page </title>
+    </head>
+    
+    <body>
+        <b> Hey there! </b>
+    </body>
+    </html>
+    `);
 }
 
 function fibonacci (n)
